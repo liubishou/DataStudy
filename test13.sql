@@ -1,0 +1,76 @@
+CREATE DATABASE test04_emp
+
+USE test04_emp
+
+CREATE TABLE emp2(
+id INT,
+emp_name VARCHAR(15)
+);
+
+CREATE TABLE dept2(
+id INT,
+dept_name VARCHAR(15)
+)
+
+ALTER TABLE emp2
+ADD PRIMARY KEY(id)
+
+ALTER TABLE dept2
+ADD PRIMARY KEY(id)
+
+ALTER TABLE emp2
+ADD dept_id INT
+
+ALTER TABLE emp2
+ADD CONSTRAINT fk_emp2_deptid FOREIGN KEY(dept_id) REFERENCES dept2(id)
+
+DESC emp2
+DESC dept2
+
+USE test01_library
+
+DESC boooks
+
+CREATE DATABASE test04_company
+
+CREATE TABLE office(
+officeCode INT(10) PRIMARY KEY,
+city VARCHAR(50) NOT NULL,
+address VARCHAR(50),
+country VARCHAR(50) NOT NULL,
+postalCode VARCHAR(15) UNIQUE
+)
+
+DESC office
+
+CREATE TABLE emp(
+employeeNumber INT(11) PRIMARY KEY AUTO_INCREMENT,
+lastName VARCHAR(50) NOT NULL,
+firstName VARCHAR(50) NOT NULL,
+mobile VARCHAR(25) UNIQUE,
+officeCode INT(10) NOT NULL,
+jobTitle VARCHAR(50) NOT NULL,
+birth DATETIME NOT NULL,
+note VARCHAR(255),
+sex VARCHAR(5),
+CONSTRAINT fk_emp_officed FOREIGN KEY (officeCode) REFERENCES office(officeCode)
+)
+DESC emp
+ALTER TABLE emp
+MODIFY mobile VARCHAR(25) AFTER officeCode
+
+ALTER TABLE emp
+CHANGE birth employee_birth DATETIME
+
+ALTER TABLE emp
+MODIFY sex CHAR(1) NOT NULL
+
+ALTER TABLE emp
+DROP COLUMN note
+
+ALTER TABLE emp
+ADD favorite VARCHAR(100)
+
+RENAME TABLE emp
+TO employee_info
+
